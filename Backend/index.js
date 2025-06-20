@@ -1,0 +1,196 @@
+const express=require('express');
+
+const app=express();
+const cors=require('cors');
+app.use(cors());
+
+const eating=[
+    {
+      "id": 1,
+      "name": "Paneer Butter Masala",
+      "category": "Main Course",
+      "description": "Cottage cheese cubes in rich tomato and butter gravy.",
+      "price": 220,
+      "rating": 4.7,
+      "image": "https://myfoodstory.com/wp-content/uploads/2021/07/restaurant-style-paneer-butter-masala-2-500x500.jpg"
+    },
+    {
+      "id": 2,
+      "name": "Vegetable Biryani",
+      "category": "Main Course",
+      "description": "Aromatic basmati rice cooked with mixed vegetables and spices.",
+      "price": 180,
+      "rating": 4.5,
+      "image": "https://i.ytimg.com/vi/Do7ZdUodDdw/maxresdefault.jpg"
+    },
+    {
+      "id": 3,
+      "name": "Tandoori Roti",
+      "category": "Breads",
+      "description": "Whole wheat flatbread baked in a tandoor.",
+      "price": 20,
+      "rating": 4.2,
+      "image": "https://www.cookwithmanali.com/wp-content/uploads/2021/07/Tandoori-Roti-500x500.jpg"
+    },
+    {
+      "id": 4,
+      "name": "Butter Naan",
+      "category": "Breads",
+      "description": "Soft refined flour naan with butter.",
+      "price": 30,
+      "rating": 4.4,
+      "image": "https://orders.popskitchen.in/storage/2024/09/image-69.png"
+    },
+    {
+      "id": 5,
+      "name": "Aloo Gobi",
+      "category": "Main Course",
+      "description": "Potatoes and cauliflower cooked with Indian spices.",
+      "price": 160,
+      "rating": 4.3,
+      "image": "https://static01.nyt.com/images/2023/12/21/multimedia/ND-Aloo-Gobi-gkwc/ND-Aloo-Gobi-gkwc-mediumSquareAt3X.jpg"
+    },
+    {
+      "id": 6,
+      "name": "Palak Paneer",
+      "category": "Main Course",
+      "description": "Spinach puree cooked with cottage cheese and spices.",
+      "price": 210,
+      "rating": 4.6,
+      "image": "https://static.toiimg.com/photo/53093667.cms"
+    },
+    {
+      "id": 7,
+      "name": "Veg Manchurian Dry",
+      "category": "Starters",
+      "description": "Crispy vegetable balls in spicy Manchurian sauce.",
+      "price": 150,
+      "rating": 4.5,
+      "image": "https://www.yummytummyaarthi.com/wp-content/uploads/2022/08/veg-manchurian-1.jpeg"
+    },
+    {
+      "id": 8,
+      "name": "Tomato Soup",
+      "category": "Soups",
+      "description": "Classic creamy tomato soup with herbs.",
+      "price": 90,
+      "rating": 4.1,
+      "image": "https://www.thegardengrazer.com/wp-content/uploads/2024/10/vegan-tomato-soup-75.jpg"
+    },
+    {
+      "id": 9,
+      "name": "Sweet Corn Soup",
+      "category": "Soups",
+      "description": "Light and creamy soup with sweet corn and vegetables.",
+      "price": 100,
+      "rating": 4.2,
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmxdHZc2mtzSdsj5XzYdAvJsgG_bdyZhVpCw&s"
+    },
+    {
+      "id": 10,
+      "name": "Masala Dosa",
+      "category": "South Indian",
+      "description": "Crispy rice crepe filled with spiced mashed potatoes.",
+      "price": 130,
+      "rating": 4.6,
+      "image": "https://vismaifood.com/storage/app/uploads/public/8b4/19e/427/thumb__700_0_0_0_auto.jpg"
+    },
+    {
+      "id": 11,
+      "name": "Idli Sambhar",
+      "category": "South Indian",
+      "description": "Steamed rice cakes served with lentil curry and chutney.",
+      "price": 90,
+      "rating": 4.3,
+      "image": "https://media.istockphoto.com/id/184721030/photo/sambar-with-idli-indian-dish.jpg?s=612x612&w=0&k=20&c=G1Ee4Yc6m-LOzU6g3IP9rjotMvQTPpt7ee7kmUAIz5M="
+    },
+    {
+      "id": 12,
+      "name": "Chole Bhature",
+      "category": "North Indian",
+      "description": "Spicy chickpeas served with deep-fried bread.",
+      "price": 120,
+      "rating": 3.5,
+      "image": "https://www.shutterstock.com/image-photo/chole-bhature-north-indian-food-600nw-2238261205.jpg"
+    },
+    {
+      "id": 13,
+      "name": "Mixed Veg Curry",
+      "category": "Main Course",
+      "description": "Seasonal vegetables cooked in spicy Indian gravy.",
+      "price": 170,
+      "rating": 4.2,
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-w8B263OjL_2iZ6U6ZFoXyBc8crKf2cLPxQ&s"
+    },
+    {
+      "id": 14,
+      "name": "Matar Paneer",
+      "category": "Main Course",
+      "description": "Peas and cottage cheese cooked in onion-tomato gravy.",
+      "price": 200,
+      "rating": 3.9,
+      "image": "https://media.istockphoto.com/id/1077980738/photo/green-peas-or-matar-paneer-curry-recipe-served-in-a-bowl-selective-focus.jpg?s=612x612&w=0&k=20&c=SShuhVPIWBpUaJXqvdWqjPrh0AqsR6VR68GInZlyw6Y="
+    },
+    {
+      "id": 15,
+      "name": "Gulab Jamun",
+      "category": "Desserts",
+      "description": "Fried milk-solid balls soaked in sugar syrup.",
+      "price": 70,
+      "rating": 4.7,
+      "image": "https://img.freepik.com/free-photo/flat-lay-indian-dessert-assortment_23-2149312344.jpg?semt=ais_hybrid&w=740"
+    },
+    {
+      "id": 16,
+      "name": "Rasgulla",
+      "category": "Desserts",
+      "description": "Soft spongy balls made of chhena soaked in syrup.",
+      "price": 70,
+      "rating": 4.6,
+      "image": "https://t4.ftcdn.net/jpg/02/23/02/33/360_F_223023382_DkOOzyFXfzOpHDXVSgGb2xmS1uZOkzNn.jpg"
+    },
+    {
+      "id": 17,
+      "name": "Curd Rice",
+      "category": "South Indian",
+      "description": "Rice mixed with curd and lightly spiced with mustard and curry leaves.",
+      "price": 100,
+      "rating": 3.7,
+      "image": "https://rakskitchen.net/wp-content/uploads/2012/06/curd-rice-feat.jpg"
+    },
+    {
+      "id": 18,
+      "name": "Lassi (Sweet)",
+      "category": "Beverages",
+      "description": "Traditional Punjabi yogurt-based sweet drink.",
+      "price": 60,
+      "rating": 3.9,
+      "image": "https://www.indianveggiedelight.com/wp-content/uploads/2023/01/sweet-lassi-recipe-featured.jpg"
+    },
+    {
+      "id": 19,
+      "name": "Masala Chai",
+      "category": "Beverages",
+      "description": "Spiced Indian tea made with milk and herbs.",
+      "price": 30,
+      "rating": 4.3,
+      "image": "https://masalaandchai.com/wp-content/uploads/2021/07/Masala-Chai-Featured.jpg"
+    },
+    {
+      "id": 20,
+      "name": "Fresh Lime Soda",
+      "category": "Beverages",
+      "description": "Refreshing soda with lime juice and salt/sugar.",
+      "price": 50,
+      "rating": 4.4,
+      "image": "https://thumbs.dreamstime.com/b/fresh-cold-refreshment-drink-mineral-water-soda-lime-mint-wooden-table-summer-32588442.jpg"
+    }
+  ]
+
+  app.get('/',(req,res)=>{
+    res.json(eating);
+  })
+
+
+
+app.listen(4000)
