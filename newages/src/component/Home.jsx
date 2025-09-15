@@ -17,7 +17,7 @@ const Home = () => {
   const [user, setUser] = useState([]);
 
   const handleCid = async () => {
-    const data = await axios.get('http://localhost:4000/');
+    const data = await axios.get('https://restaurant-food-5d7o.onrender.com');
     setUser(data.data)
   }
 
