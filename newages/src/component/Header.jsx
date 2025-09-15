@@ -1,28 +1,42 @@
+import React from "react";
+import Cart from "./Cart";
+import { Link } from "react-router-dom";
 
-import Cart from './Cart'
-
-const Header = ({onCartClick,count}) => {
-
-  
-  
-
+const Header = (props) => {
   return (
-    <div className=' justify-around flex w-full bg-rose-800 text-white text-xl'>
-    <div className=' flex flex-row'>
-    <h1 className=' mt-6'>Always For You & with You!</h1>
-    <img className=' h-[70px]' src='delboy.svg'/>
-    <h1 className=' mt-6'>The Utkarsh Kitchen</h1>
+    <header className="flex items-center justify-between w-full bg-green-700 text-white px-6 py-4 shadow-md">
+      {/* Branding + Slogan */}
+      <div className="flex items-center gap-4">
+        <img
+          className="h-[60px] rounded-full bg-white p-1"
+          src="delboy.svg"
+          alt="Logo"
+        />
+        <div>
+          <h1 className="text-2xl font-bold">The Utkarsh Kitchen</h1>
+          <p className="text-sm italic text-green-100">
+            Always for You & With You!
+          </p>
+        </div>
+      </div>
+
+      {/* Right Section (Cart) */}
+      <div className="flex items-center gap-6">
+        <Link
+          to="/cart"
+          className="relative flex items-center hover:scale-105 transition-transform"
+        >
+          <img className="h-[36px]" src="Card-1.svg" alt="Cart Icon" />
+          {props.count > 0 && (
+            <span className="absolute -top-2 -right-3 bg-white text-green-700 text-xs font-bold rounded-full px-2">
+              {props.count}
+            </span>
+          )}
+        </Link>
     
-    </div>
-    <div className=' mt-4 flex flex-row'>
-    <img onClick={<Cart handleBick onClick={onCartClick} count={count} />} className=' h-[32px]' src='Card-1.svg'/>
-    <h1>{count}</h1>
-    <img className=' mx-5 h-[32px]' src='Card.svg'/>
-    </div>
-    </div>
-  )
-}
+      </div>
+    </header>
+  );
+};
 
-
-export default Header
- 
+export default Header;
